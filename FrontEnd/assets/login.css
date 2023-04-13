@@ -1,0 +1,197 @@
+body {
+	background-color: #FFFEF8;
+}
+
+footer {
+	background-color: rgb(255, 255, 255);
+}
+
+html, body, span, h1, h2, p,
+a, img, ul, li, form, label, legend, 
+footer, header, hgroup,
+menu, nav, section {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+footer, header, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ul {
+	list-style: none;
+}
+header a {
+	text-decoration: none;
+}
+
+/** end reset css**/
+body {
+	max-width: 1140px;
+	margin:auto;
+	font-family: 'Work Sans' ;
+	font-size: 14px;
+}
+body {
+	max-width: 1140px;
+	font-family: 'Work Sans' ;
+	font-size: 14px;
+}
+header {
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0 100px 0;
+}
+section {
+	margin: 50px 0;
+}
+
+h1 a {
+	display: flex;
+	flex-direction: column;
+	font-family: 'Syne';
+	font-size: 22px;
+	font-weight: 800;
+	color: #B1663C
+}
+
+h1 a > span {
+	font-family: 'Work Sans';
+	font-size:10px;
+	letter-spacing: 0.1em;
+}
+
+h2{
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154
+}
+nav ul {
+	display: flex;
+	list-style-type: none;
+
+}
+nav li {
+	padding-left: 40px;
+	text-decoration: none;
+}
+
+nav li a {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+}
+nav span {
+    font-weight: 600;
+}
+nav li a {
+	color: black;
+}
+
+li:hover {
+	color: #B1663C;
+}
+nav img {
+	height: 19.36px;
+	width: 19.36px;
+}
+
+#loginform {
+	width: 50%;
+	margin: auto;
+}
+
+main {
+	min-height: 100%;
+	position: relative;
+	padding-bottom: 100px;
+}
+
+#loginform > * {
+	text-align: center;
+
+}
+#loginform h2{
+	margin-bottom: 20px;
+}
+#loginform form {
+    text-align: left;
+    margin-top:30px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    
+}
+
+
+
+#loginform input {
+    height: 35px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#loginform label {
+	margin: 2em 0 1em 90px;
+}
+#loginform a {
+    color: black;
+}
+
+#email, #password {
+	width: 379px;
+	height: 51px;
+    margin-left: 90px;
+}
+
+input[type="submit"]{
+	font-family: 'Syne';
+	font-weight: 700;
+    font-size: 14px;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+}
+
+
+footer {
+	position: absolute;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	text-align: left;
+	height: 60px;
+	bottom: 0;
+    left: 0;
+}
+
+footer ul {
+    margin-right: 80px;
+}
+footer li {
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 100;
+	font-size: 14px;
+	line-height: 16px;
+	
+}
+
+footer li a {
+	text-decoration: none;
+}
