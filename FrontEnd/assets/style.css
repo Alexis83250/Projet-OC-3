@@ -151,19 +151,15 @@ nav img {
 	margin-bottom: 1em;
 }
 /*FILTRE*/
-.filter {
+.filterCategory {
     display: flex;
     flex-direction: row;
     align-items: center;
 	justify-content: center;
     padding-top: 30px;
     padding-bottom: 10px;
-}
-
-.filterCategory {
-    display: flex;
-    flex-direction: row;
-    width: 70%;
+	width: 70%;
+	margin: auto;
 }
 
 .filterChoice {

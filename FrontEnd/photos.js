@@ -22,11 +22,6 @@ function genererPhotos(photos) {
     const categoryIdElement = document.createElement("p");
     categoryIdElement.innerText = article.categoryId;
 
-    //Création des élements pour l'exercice
-    const descriptionElement = document.createElement("p");
-    descriptionElement.innerText =
-      article.description ?? "Pas de description pour le moment.";
-
     //Ajout de articleElement dans sectionGallery
 
     sectionGallery.appendChild(articleElement);
@@ -36,46 +31,44 @@ function genererPhotos(photos) {
     articleElement.appendChild(titleElement);
   }
 }
-
+//permet de generer les photos non filtrés par default
 genererPhotos(photos);
-//Filtre des photos pas encore simplifié -------------
 
-const filtre1 = document.querySelector(".choix1");
+const reponseFilt = await fetch("filtre.json");
+const filtres = await reponseFilt.json();
 
-filtre1.addEventListener("click", function () {
-  const photosFiltrees1 = photos.filter(function (photo) {
-    return photo.categoryId <= 4;
+function genFiltres(filtres) {
+  for (let i = 0; i < filtres.length; i++) {
+    const div = filtres[i];
+
+    const sectionFiltres = document.querySelector(".filterCategory");
+
+    const divEl = document.createElement("div");
+    divEl.classList.add("filterChoice", "data-id[i]");
+    divEl.innerText = div.name;
+
+    //const nameFiltres = document.createElement("p");
+    //nameFiltres.innerText = div.name;
+
+    //divEl.appendChild(nameFiltres);
+
+    sectionFiltres.appendChild(divEl);
+  }
+}
+genFiltres(filtres);
+
+// Permet de selectionner toutes les filterchoice
+
+console.log(Array.from(document.querySelectorAll(".filterChoice")));
+
+Array.from(document.querySelectorAll(".filterChoice")).forEach((el) => {
+  el.addEventListener("click", (event) => {
+    const categoryId = event.target.dataset.id;
+    console.log("Category", categoryId);
+    const photosFiltrees4 = photos.filter(function (photo) {
+      return photo.categoryId == categoryId;
+    });
+    document.querySelector(".gallery").innerHTML = "";
+    genererPhotos(photosFiltrees4);
   });
-  document.querySelector(".gallery").innerHTML = "";
-  genererPhotos(photosFiltrees1);
-});
-
-const filtre2 = document.querySelector(".choix2");
-
-filtre2.addEventListener("click", function () {
-  const photosFiltrees2 = photos.filter(function (photo) {
-    return photo.categoryId == 1;
-  });
-  document.querySelector(".gallery").innerHTML = "";
-  genererPhotos(photosFiltrees2);
-});
-
-const filtre3 = document.querySelector(".choix3");
-
-filtre3.addEventListener("click", function () {
-  const photosFiltrees3 = photos.filter(function (photo) {
-    return photo.categoryId == 2;
-  });
-  document.querySelector(".gallery").innerHTML = "";
-  genererPhotos(photosFiltrees3);
-});
-
-const filtre4 = document.querySelector(".choix4");
-
-filtre4.addEventListener("click", function () {
-  const photosFiltrees4 = photos.filter(function (photo) {
-    return photo.categoryId == 3;
-  });
-  document.querySelector(".gallery").innerHTML = "";
-  genererPhotos(photosFiltrees4);
 });

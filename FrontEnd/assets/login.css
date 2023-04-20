@@ -37,6 +37,7 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	
 }
 body {
 	max-width: 1140px;
@@ -46,7 +47,7 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0 100px 0;
+	margin: 50px 20px 100px 20px;
 }
 section {
 	margin: 50px 0;
@@ -109,12 +110,11 @@ nav img {
 #loginform {
 	width: 50%;
 	margin: auto;
+	padding-top: 70px;
 }
 
 main {
-	min-height: 100%;
 	position: relative;
-	padding-bottom: 100px;
 }
 
 #loginform > * {
@@ -133,7 +133,13 @@ main {
     
 }
 
-
+.formulaire {
+	text-align: left;
+    margin-top:30px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
 
 #loginform input {
     height: 35px;
@@ -143,7 +149,7 @@ main {
 }
 
 #loginform label {
-	margin: 2em 0 1em 90px;
+	margin: 2em 0 1em 0px; 
 }
 #loginform a {
     color: black;
@@ -152,7 +158,6 @@ main {
 #email, #password {
 	width: 379px;
 	height: 51px;
-    margin-left: 90px;
 }
 
 input[type="submit"]{
@@ -165,6 +170,7 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	cursor: pointer;
 }
 
 
