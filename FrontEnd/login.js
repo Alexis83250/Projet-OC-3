@@ -22,9 +22,9 @@ btnEnvoyer.addEventListener("click", async (e) => {
     // if HTTP-status is 200-299
     window.location.href = "index.html";
     // obtenir le corps de réponse (la méthode expliquée ci-dessous)
-    let json = await response.json();
-    let tok = JSON.stringify(json);
-    localStorage.setItem("json", tok);
+    let token = await response.json();
+    let tok = JSON.stringify(token.token);
+    localStorage.setItem("token", tok);
   } else {
     alert("Erreur dans l’identifiant ou le mot de passe");
   }

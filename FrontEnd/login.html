@@ -26,14 +26,14 @@
 <main>
 	<section id="loginform">
 		<h2>Log In</h2>
-		<form method="post">
-			<div class="formulaire">
+		<form action="http://localhost:5678/api/users/login" method="post">
+			<div class="formulaire" id="formulaire">
 				<label for="name">E-mail</label>
 				<input type="email" name="email" id="email" required>
 				<label for="email">Mot de passe</label>
-				<input type="password" name="password" id="password" required>
+				<input type="myPassword" name="myPassword" id="myPassword" required>
 			</div>
-			<input type="submit" value="Se connecter" id="valider">
+			<input type="submit" name="se connecter" id="valider">
 		</form>
         <p><a href="#">Mot de passe oublié</a></p>
 	</section>

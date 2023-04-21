@@ -59,7 +59,7 @@ genFiltres(filtres);
 
 // Permet de selectionner toutes les filterchoice
 
-console.log(Array.from(document.querySelectorAll(".filterChoice")));
+//console.log(Array.from(document.querySelectorAll(".filterChoice")));
 
 Array.from(document.querySelectorAll(".filterChoice")).forEach((el) => {
   el.addEventListener("click", (event) => {
