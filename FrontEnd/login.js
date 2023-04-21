@@ -1,14 +1,16 @@
-let myEmail = document.getElementById("email").value;
-let myPassword = document.getElementById("password").value;
-
-let user = {
-  myEmail,
-  myPassword,
-};
-
 const btnEnvoyer = document.querySelector("#valider");
-
-btnEnvoyer.addEventListener("click", async (event) => {
+btnEnvoyer.addEventListener("click", async (e) => {
+  e.preventDefault();
+  localStorage.setItem("email", document.querySelector("#email").value);
+  localStorage.setItem(
+    "myPassword",
+    document.querySelector("#myPassword").value
+  );
+  let user = {
+    email: document.querySelector("#email").value,
+    password: document.querySelector("#myPassword").value,
+  };
+  console.log(JSON.stringify(user));
   let response = await fetch("http://localhost:5678/api/users/login", {
     method: "POST",
     headers: {
@@ -16,17 +18,76 @@ btnEnvoyer.addEventListener("click", async (event) => {
     },
     body: JSON.stringify(user),
   });
-  let result = await response.json();
+  if (response.ok) {
+    // if HTTP-status is 200-299
+    window.location.href = "index.html";
+    // obtenir le corps de réponse (la méthode expliquée ci-dessous)
+    let json = await response.json();
+    let tok = JSON.stringify(json);
+    localStorage.setItem("json", tok);
+  } else {
+    alert("Erreur dans l’identifiant ou le mot de passe");
+  }
+});
+/*.then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });*/
+
+/*if (response.ok) {
+  //window.location.href = "index.html";
+  let json = await response.json();
+  localStorage.setItem("json", document.querySelector("json"));
+  let tok = document.querySelector("json");
+  console.log(tok);
+} else {
+  window.location.href = "login.html";
   alert(result.message);
+}*/
+
+/*let myEmail = document.querySelector("#email");
+let myPassword = document.querySelector("#password");
+
+let user = {
+  email: "",
+  password: "",
+};*/
+/*
+
+
+/*
+btnEnvoyer.addEventListener("click", async (e) => {
+  e.preventDefault();
+  let response = await fetch("http://localhost:5678/api/users/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+  if (response.ok) {
+    window.location.href = "index.html";
+    let json = await response.json();
+  } else {
+    window.location.href = "login.html";
+    alert(result.message);
+  }
 });
 
-/* window.location.href="";
+//Récuperation du token
+//let tok = localStorage.setItem("json", document.querySelector("json").token);
+/*
+function admin(e) {
+  e.preventDefault();
+  let admintok = tok;
+  if (admintok == tok){
+    //Permet de rendre les objet de manipulation du site visible
+    
+  }
+  
+}*/
+
+/* window.location.href = "";
 ou 
 document.location.href="";
 */
-/*if (response.ok) { // if HTTP-status is 200-299
-    // obtenir le corps de réponse (la méthode expliquée ci-dessous)
-    let json = await response.json();
-  } else {
-    alert("HTTP-Error: " + response.status);
-  }*/
