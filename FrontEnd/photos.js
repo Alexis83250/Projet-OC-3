@@ -72,3 +72,5 @@ Array.from(document.querySelectorAll(".filterChoice")).forEach((el) => {
     genererPhotos(photosFiltrees4);
   });
 });
+
+//modification du site apres login
