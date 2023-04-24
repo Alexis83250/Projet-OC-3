@@ -74,3 +74,24 @@ Array.from(document.querySelectorAll(".filterChoice")).forEach((el) => {
 });
 
 //modification du site apres login
+let monToken = localStorage.getItem("token");
+let afficherValeur = document.querySelector(".postlogin");
+let enleverSeLog = document.querySelector("#selog");
+let seDeLogin = document.querySelector(".sedelog");
+
+console.log(monToken);
+
+if (monToken === null) {
+  afficherValeur.style.display = "none";
+} else {
+  afficherValeur.style.display = "block";
+  enleverSeLog.style.display = "none";
+}
+/*
+seDeLogin.addEventListener("click", () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("Key");
+  localStorage.removeItem("email");
+  localStorage.removeItem("myPassword");
+  window.location.reload();
+});*/

@@ -29,6 +29,7 @@ btnEnvoyer.addEventListener("click", async (e) => {
     alert("Erreur dans l’identifiant ou le mot de passe");
   }
 });
+
 /*.then((response) => response.json())
     .then((data) => {
       console.log(data);

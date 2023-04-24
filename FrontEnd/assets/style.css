@@ -321,10 +321,6 @@ footer li a {
 	cursor: pointer;
 }
 
-#sedelog {
-	display: none;
-}
-
 .modification i {
 	padding-right: 5px;
 }
@@ -332,11 +328,11 @@ footer li a {
 .modification {
 	padding-top: 10px;
 	display: flex;
-	
 }
 
-.postlogin {
-	display: none;
+.modification:hover {
+	cursor: pointer;
 }
+
 
 
