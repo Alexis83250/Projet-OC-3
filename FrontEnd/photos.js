@@ -44,7 +44,8 @@ function genFiltres(filtres) {
     const sectionFiltres = document.querySelector(".filterCategory");
 
     const divEl = document.createElement("div");
-    divEl.classList.add("filterChoice", "data-id[i]");
+    divEl.classList.add("filterChoice");
+    divEl.dataset.id = [i];
     divEl.innerText = div.name;
 
     //const nameFiltres = document.createElement("p");
@@ -65,29 +66,38 @@ Array.from(document.querySelectorAll(".filterChoice")).forEach((el) => {
   el.addEventListener("click", (event) => {
     const categoryId = event.target.dataset.id;
     console.log("Category", categoryId);
-    const photosFiltrees4 = photos.filter(function (photo) {
-      return photo.categoryId == categoryId;
-    });
-    document.querySelector(".gallery").innerHTML = "";
-    genererPhotos(photosFiltrees4);
+    if (categoryId <= 0) {
+      document.querySelector(".gallery").innerHTML = "";
+      genererPhotos(photos);
+    } else {
+      const photosFiltrees4 = photos.filter(function (photo) {
+        return photo.categoryId == categoryId;
+      });
+      document.querySelector(".gallery").innerHTML = "";
+      genererPhotos(photosFiltrees4);
+    }
   });
 });
 
-//modification du site apres login
+//modification du site apres login -----------------------------------------
 let monToken = localStorage.getItem("token");
-let afficherValeur = document.querySelector(".postlogin");
+let afficherValeur = document.querySelector("postlogin");
 let enleverSeLog = document.querySelector("#selog");
 let seDeLogin = document.querySelector(".sedelog");
 
-console.log(monToken);
+console.log(afficherValeur);
 
-if (monToken === null) {
+if (monToken === null || monToken === undefined) {
   afficherValeur.style.display = "none";
 } else {
   afficherValeur.style.display = "block";
   enleverSeLog.style.display = "none";
 }
 /*
+
+
+
+
 seDeLogin.addEventListener("click", () => {
   localStorage.removeItem("token");
   localStorage.removeItem("Key");
