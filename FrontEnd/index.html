@@ -15,7 +15,7 @@
 <body>
 	<section class="postlogin edition ">
 		<div>
-			<i class="fa-light fa-pen-to-square"></i>
+			<i class="fa-regular fa-pen-to-square"></i>
 			<p>Mode édition</p>
 			<p id="changement">publier les changements</p>
 		</section>
@@ -38,7 +38,7 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
-			<div class="postlogin modification "><i class="fa-light fa-pen-to-square"></i>modifier</div>
+			<div class="postlogin modification "><a href="#"><i class="fa-regular fa-pen-to-square"></i>modifier</a></div>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -51,7 +51,24 @@
 	<section id="portfolio">
 		<div class="titre">
 			<h2>Mes Projets</h2>
-		<div class="postlogin modification "><i class="fa-light fa-pen-to-square"></i>modifier</div>
+			<div class="postlogin modification"><a href="#modal1" class="js-modal"><i class="fa-regular fa-pen-to-square"></i>modifier</a></div>
+			<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display: none;">
+				<div class="modal-wrapper">
+					<div class="close">
+						<i class="fa-solid fa-xmark fa-2xl"></i>
+					</div>
+					<div class="contenuModal">
+						<h2 id="titlemodal">Galerie photo</h2>
+						<section class="galleryModal">
+
+						</section>
+						<form action="http://localhost:5678/api/users/login" method="post">
+							<input type="submit" name="Ajouter une photo" id="validerModale" value="Ajouter une photo">
+						</form>
+						<p><a href="#">Supprimer la galerie</a></p>
+					</div>
+				</div>
+			</aside>
 		</div>
 		<div class="filterCategory">
 	</section>
