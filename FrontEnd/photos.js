@@ -34,6 +34,8 @@ function genererPhotos(photos) {
 //permet de generer les photos non filtrés par default
 genererPhotos(photos);
 
+// MODAL -----------------------------
+
 const reponseFilt = await fetch("filtre.json");
 const filtres = await reponseFilt.json();
 
@@ -81,7 +83,7 @@ Array.from(document.querySelectorAll(".filterChoice")).forEach((el) => {
 
 //modification du site apres login -----------------------------------------
 let monToken = localStorage.getItem("token");
-let afficherValeur = document.querySelector("postlogin");
+let afficherValeur = document.querySelectorAll(".postlogin");
 let enleverSeLog = document.querySelector("#selog");
 let seDeLogin = document.querySelector(".sedelog");
 
@@ -93,10 +95,6 @@ if (monToken === null || monToken === undefined) {
   afficherValeur.style.display = "block";
   enleverSeLog.style.display = "none";
 }
-/*
-
-
-
 
 seDeLogin.addEventListener("click", () => {
   localStorage.removeItem("token");
@@ -104,4 +102,54 @@ seDeLogin.addEventListener("click", () => {
   localStorage.removeItem("email");
   localStorage.removeItem("myPassword");
   window.location.reload();
-});*/
+});
+
+//---------------MODAL--------------------
+
+const openModal = function (e) {
+  e.preventDefault();
+  const target = document.querySelector(e.target.getAttribute("href"));
+  target.style.display = block;
+  target.remove("aria-hidden");
+  target.setAttribute("aria-modal", "true");
+};
+document.querySelectorAll(".js-modal").forEach((a) => {
+  a.addEventListener("click", openModal);
+});
+
+/*
+// Récupération des pièces depuis le fichier JSON
+const reponseModal = await fetch("http://localhost:5678/api/works");
+const photosModal = await reponse.json();
+
+//Création d'une function qui genere les photos
+function genererPhotosModal(photosModal) {
+  //Création d'une boucle qui va prendre toutes les photos
+  for (let i = 0; i < photosModal.length; i++) {
+    // Création des balises
+    const article = photosModal[i];
+
+    const sectionGallery = document.querySelector(".galleryModal");
+
+    const articleElement = document.createElement("article");
+
+    const titleElement = document.createElement("p");
+    titleElement.innerText = article.title;
+
+    const imageElement = document.createElement("img");
+    imageElement.src = article.imageUrl;
+
+    const categoryIdElement = document.createElement("p");
+    categoryIdElement.innerText = article.categoryId;
+
+    //Ajout de articleElement dans sectionGallery
+
+    sectionGallery.appendChild(articleElement);
+
+    //Ajout de nos balises au DOM
+    articleElement.appendChild(imageElement);
+    articleElement.appendChild(titleElement);
+  }
+}
+//permet de generer les photos non filtrés par default
+genererPhotosModal(photosModal);*/
