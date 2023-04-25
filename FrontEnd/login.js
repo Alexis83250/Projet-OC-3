@@ -1,11 +1,7 @@
 const btnEnvoyer = document.querySelector("#valider");
 btnEnvoyer.addEventListener("click", async (e) => {
   e.preventDefault();
-  localStorage.setItem("email", document.querySelector("#email").value);
-  localStorage.setItem(
-    "myPassword",
-    document.querySelector("#myPassword").value
-  );
+
   let user = {
     email: document.querySelector("#email").value,
     password: document.querySelector("#myPassword").value,
@@ -20,16 +16,23 @@ btnEnvoyer.addEventListener("click", async (e) => {
   });
   if (response.ok) {
     // if HTTP-status is 200-299
-    window.location.href = "index.html";
+
     // obtenir le corps de réponse (la méthode expliquée ci-dessous)
     let token = await response.json();
     let tok = JSON.stringify(token.token);
     localStorage.setItem("token", tok);
+    window.location.href = "index.html";
   } else {
     alert("Erreur dans l’identifiant ou le mot de passe");
   }
 });
 
+/*
+localStorage.setItem("email", document.querySelector("#email").value);
+  localStorage.setItem(
+    "myPassword",
+    document.querySelector("#myPassword").value
+  );*/
 /*.then((response) => response.json())
     .then((data) => {
       console.log(data);

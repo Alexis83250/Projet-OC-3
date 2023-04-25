@@ -83,44 +83,53 @@ Array.from(document.querySelectorAll(".filterChoice")).forEach((el) => {
 
 //modification du site apres login -----------------------------------------
 let monToken = localStorage.getItem("token");
+//Faire ça à créer un tableau
 let afficherValeur = document.querySelectorAll(".postlogin");
 let enleverSeLog = document.querySelector("#selog");
 let seDeLogin = document.querySelector(".sedelog");
 
-console.log(afficherValeur);
-
 if (monToken === null || monToken === undefined) {
-  afficherValeur.style.display = "none";
+  Array.from(afficherValeur).forEach((el) => {
+    el.style.display = "none";
+  });
 } else {
-  afficherValeur.style.display = "block";
-  enleverSeLog.style.display = "none";
+  Array.from(afficherValeur).forEach((el) => {
+    el.style.display = "block";
+    enleverSeLog.style.display = "none";
+  });
 }
 
 seDeLogin.addEventListener("click", () => {
   localStorage.removeItem("token");
-  localStorage.removeItem("Key");
-  localStorage.removeItem("email");
-  localStorage.removeItem("myPassword");
   window.location.reload();
 });
 
 //---------------MODAL--------------------
+//OUVRIR LA MODAL----------------------------------
+const target = document.querySelector("#modal1");
 
 const openModal = function (e) {
   e.preventDefault();
-  const target = document.querySelector(e.target.getAttribute("href"));
-  target.style.display = block;
-  target.remove("aria-hidden");
+  target.style.display = null;
+  target.setAttribute("aria-hidden", "false");
   target.setAttribute("aria-modal", "true");
 };
-document.querySelectorAll(".js-modal").forEach((a) => {
-  a.addEventListener("click", openModal);
-});
 
-/*
+document.querySelector(".js-modal").addEventListener("click", openModal);
+//CLOSE LA MODAL----------------------------------
+
+const closeModal = function (e) {
+  e.preventDefault();
+  target.style.display = "none";
+  target.setAttribute("aria-hidden", "true");
+  target.setAttribute("aria-modal", "false");
+};
+
+document.querySelector(".close").addEventListener("click", closeModal);
+
 // Récupération des pièces depuis le fichier JSON
 const reponseModal = await fetch("http://localhost:5678/api/works");
-const photosModal = await reponse.json();
+const photosModal = await reponseModal.json();
 
 //Création d'une function qui genere les photos
 function genererPhotosModal(photosModal) {
@@ -134,7 +143,7 @@ function genererPhotosModal(photosModal) {
     const articleElement = document.createElement("article");
 
     const titleElement = document.createElement("p");
-    titleElement.innerText = article.title;
+    titleElement.innerText = "editer";
 
     const imageElement = document.createElement("img");
     imageElement.src = article.imageUrl;
@@ -152,4 +161,4 @@ function genererPhotosModal(photosModal) {
   }
 }
 //permet de generer les photos non filtrés par default
-genererPhotosModal(photosModal);*/
+genererPhotosModal(photosModal);
