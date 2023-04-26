@@ -53,18 +53,53 @@
 			<div class="postlogin modification"><a href="#modal1" class="js-modal"><i class="fa-regular fa-pen-to-square"></i>modifier</a></div>
 			<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display: none;">
 				<div class="modal-wrapper">
-					<div class="close">
-						<i class="fa-solid fa-xmark fa-2xl"></i>
-					</div>
-					<div class="contenuModal">
-						<h2 id="titlemodal">Galerie photo</h2>
-						<section class="galleryModal">
+					<div class="contenu-enlever">
+						<div class="close">
+							<i class="fa-solid fa-xmark fa-2xl"></i>
+						</div>
+						<div class="contenuModal">
+							<h2 id="titlemodal">Galerie photo</h2>
+							<section class="galleryModal">
 
-						</section>
-						<form action="http://localhost:5678/api/users/login" method="post">
-							<input type="submit" name="Ajouter une photo" id="validerModale" value="Ajouter une photo">
-						</form>
-						<p><a href="#">Supprimer la galerie</a></p>
+							</section>
+							<form action="" method="post">
+								<input type="text" name="Ajouter une photo" id="validerModale" value="Ajouter une photo">
+							</form>
+							<p class="closeAll"><a href="#">Supprimer la galerie</a></p>
+						</div>
+					</div>
+				
+					<div>
+						<div class="modal-photo" style="display: none;">
+							<div class="return">
+								<i class="fa-sharp fa-solid fa-arrow-left"></i>
+							</div>
+							<div class="close2">
+								<i class="fa-solid fa-xmark fa-2xl"></i>
+							</div>
+							<div class="contenuModal">
+								<h2>Ajout photo</h2>
+								<div class="aj-photo">
+									<i class="fa-sharp fa-regular fa-image"></i>
+									<h3 class="ajouter-photo"> + Ajouter photo</h3>
+									<p>jpg, png : 4mo max</p>
+								</div>
+								<form action="#" method="get">
+									<div class="formulaire" id="formulaire">
+										<label for="titre">Titre</label>
+										<input type="text" name="titre" id="titre" required>
+										<label for="categorie">Catégorie</label>
+										<select name="categorie" id="categorie">
+											<option value="Sélectionner une catégorie" id="0"></option>
+											<option value="Objets" id="1">Objets</option>
+											<option value="Appartements" id="2">Appartements</option>
+											<option value="Hôtels & restaurants" id="3">Hôtels & restaurants</option>
+										</select>
+									</div>
+									<input type="text" name="Valider" id="valider" value="Valider">
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
 			</aside>

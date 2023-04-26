@@ -108,6 +108,7 @@ seDeLogin.addEventListener("click", () => {
 
 //---------------MODAL--------------------
 //OUVRIR LA MODAL----------------------------------
+
 const target = document.querySelector("#modal1");
 
 const openModal = function (e) {
@@ -115,19 +116,59 @@ const openModal = function (e) {
   target.style.display = null;
   target.setAttribute("aria-hidden", "false");
   target.setAttribute("aria-modal", "true");
+  document
+    .querySelector(".contenu-enlever")
+    .addEventListener("click", stopPropagation);
+  document
+    .querySelector(".modal-photo")
+    .addEventListener("click", stopPropagation);
 };
 
 document.querySelector(".js-modal").addEventListener("click", openModal);
 //CLOSE LA MODAL----------------------------------
+const stopPropagation = function (e) {
+  e.stopPropagation();
+};
 
 const closeModal = function (e) {
   e.preventDefault();
+
+  document
+    .querySelector(".contenu-enlever")
+    .removeEventListener("click", stopPropagation);
+  document
+    .querySelector(".modal-photo")
+    .removeEventListener("click", stopPropagation);
   target.style.display = "none";
   target.setAttribute("aria-hidden", "true");
   target.setAttribute("aria-modal", "false");
 };
 
+document.querySelector(".modal").addEventListener("click", closeModal);
 document.querySelector(".close").addEventListener("click", closeModal);
+
+//---------CHANGER VISUEL MODAL------------
+const target1 = document.querySelector(".contenu-enlever");
+const target2 = document.querySelector(".modal-photo");
+const target3 = document.querySelector(".return");
+
+const changeModal = function (e) {
+  e.preventDefault();
+  target1.style.display = "none";
+  target2.style.display = null;
+};
+
+document.querySelector("#validerModale").addEventListener("click", changeModal);
+
+const returnModal = function (e) {
+  e.preventDefault();
+  target1.style.display = null;
+  target2.style.display = "none";
+};
+
+document.querySelector(".return").addEventListener("click", returnModal);
+/* -----------FERMER LA DEUXIEME MODALE ----------*/
+document.querySelector(".close2").addEventListener("click", closeModal);
 
 // Récupération des pièces depuis le fichier JSON
 const reponseModal = await fetch("http://localhost:5678/api/works");
@@ -168,26 +209,3 @@ function genererPhotosModal(photosModal) {
 }
 //permet de generer les photos non filtrés par default
 genererPhotosModal(photosModal);
-
-//---------CHANGER VISUEL MODAL------------
-const target1 = document.querySelector(".contenu-enlever");
-const target2 = document.querySelector(".modal-photo");
-const target3 = document.querySelector(".return");
-
-const changeModal = function (e) {
-  e.preventDefault();
-  target1.style.display = "none";
-  target2.style.display = null;
-};
-
-document.querySelector("#validerModale").addEventListener("click", changeModal);
-
-const returnModal = function (e) {
-  e.preventDefault();
-  target1.style.display = null;
-  target2.style.display = "none";
-};
-
-document.querySelector(".return").addEventListener("click", returnModal);
-/* -----------FERMER LA DEUXIEME MODALE ----------*/
-document.querySelector(".close2").addEventListener("click", closeModal);
