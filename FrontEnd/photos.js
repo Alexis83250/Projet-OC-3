@@ -87,6 +87,7 @@ let monToken = localStorage.getItem("token");
 let afficherValeur = document.querySelectorAll(".postlogin");
 let enleverSeLog = document.querySelector("#selog");
 let seDeLogin = document.querySelector(".sedelog");
+let filtre1 = document.querySelector(".filterCategory");
 
 if (monToken === null || monToken === undefined) {
   Array.from(afficherValeur).forEach((el) => {
@@ -96,6 +97,7 @@ if (monToken === null || monToken === undefined) {
   Array.from(afficherValeur).forEach((el) => {
     el.style.display = "block";
     enleverSeLog.style.display = "none";
+    filtre1.style.display = "none";
   });
 }
 
@@ -145,6 +147,9 @@ function genererPhotosModal(photosModal) {
     const titleElement = document.createElement("p");
     titleElement.innerText = "editer";
 
+    const iconeElement = document.createElement("div");
+    iconeElement.innerText = "III";
+
     const imageElement = document.createElement("img");
     imageElement.src = article.imageUrl;
 
@@ -158,7 +163,31 @@ function genererPhotosModal(photosModal) {
     //Ajout de nos balises au DOM
     articleElement.appendChild(imageElement);
     articleElement.appendChild(titleElement);
+    articleElement.appendChild(iconeElement);
   }
 }
 //permet de generer les photos non filtrés par default
 genererPhotosModal(photosModal);
+
+//---------CHANGER VISUEL MODAL------------
+const target1 = document.querySelector(".contenu-enlever");
+const target2 = document.querySelector(".modal-photo");
+const target3 = document.querySelector(".return");
+
+const changeModal = function (e) {
+  e.preventDefault();
+  target1.style.display = "none";
+  target2.style.display = null;
+};
+
+document.querySelector("#validerModale").addEventListener("click", changeModal);
+
+const returnModal = function (e) {
+  e.preventDefault();
+  target1.style.display = null;
+  target2.style.display = "none";
+};
+
+document.querySelector(".return").addEventListener("click", returnModal);
+/* -----------FERMER LA DEUXIEME MODALE ----------*/
+document.querySelector(".close2").addEventListener("click", closeModal);
