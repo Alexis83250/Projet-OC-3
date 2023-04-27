@@ -13,6 +13,9 @@ function genererPhotos(photos) {
 
     const articleElement = document.createElement("article");
 
+    const idElement = document.createElement("p");
+    idElement.innerText = article.id;
+
     const titleElement = document.createElement("p");
     titleElement.innerText = article.title;
 
@@ -184,11 +187,17 @@ function genererPhotosModal(photosModal) {
     const sectionGallery = document.querySelector(".galleryModal");
 
     const articleElement = document.createElement("article");
+    articleElement.classList.add("photosRealisation");
+    articleElement.dataset.id = [i];
+
+    const idElement = document.createElement("p");
+    idElement.innerText = article.id;
 
     const titleElement = document.createElement("p");
     titleElement.innerText = "editer";
 
     const iconeElement = document.createElement("div");
+    iconeElement.classList.add("deletePhoto");
     iconeElement.innerText = "III";
 
     const imageElement = document.createElement("img");
@@ -205,7 +214,79 @@ function genererPhotosModal(photosModal) {
     articleElement.appendChild(imageElement);
     articleElement.appendChild(titleElement);
     articleElement.appendChild(iconeElement);
+    //--------------Suppression photo----------------
+    iconeElement.addEventListener("click", async () => {
+      const iconeElement = article.id;
+      console.log(iconeElement);
+      let response = await fetch("http://localhost:5678/api/works/id", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        // if HTTP-status is 200-299
+        alert("Photo supprimé avec succes");
+        // obtenir le corps de réponse (la méthode expliquée ci-dessous)
+      } else {
+        alert("Echec de suppression");
+      }
+    });
+
+    //---------------FIN DE GENERER PHOTO--------------------
   }
 }
 //permet de generer les photos non filtrés par default
 genererPhotosModal(photosModal);
+
+/*
+    iconeElement.addEventListener("click", async () => {
+      const iconeElement = article.id;
+      console.log(iconeElement);
+      let response = await fetch("http://localhost:5678/api/works/id", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        // if HTTP-status is 200-299
+        alert("Photo supprimé avec succes");
+        // obtenir le corps de réponse (la méthode expliquée ci-dessous)
+      } else {
+        alert("Echec de suppression");
+      }
+    });
+
+    //---------------FIN DE GENERER PHOTO--------------------*/
+
+//Ajouter une photo avec id dans l'API-------------------
+
+const btnEnvoyerObj = document.querySelector("#valider");
+btnEnvoyerObj.addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  let nouvellePhoto = {
+    id: photosModal.length++,
+    title: document.querySelector("#titre").value,
+    imageUrl: "string",
+    categoryId: document.querySelector("#categorie").value,
+    userId: 0,
+  };
+  console.log(JSON.stringify(user));
+  let response = await fetch("http://localhost:5678/api/works/1", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(nouvellePhoto),
+  });
+  if (response.ok) {
+    // if HTTP-status is 200-299
+
+    // obtenir le corps de réponse (la méthode expliquée ci-dessous)
+    window.location.href = "index.html";
+  } else {
+    alert("Erreur de l'ajout de la photo");
+  }
+});
