@@ -239,54 +239,45 @@ function genererPhotosModal(photosModal) {
 //permet de generer les photos non filtrés par default
 genererPhotosModal(photosModal);
 
-/*
-    iconeElement.addEventListener("click", async () => {
-      const iconeElement = article.id;
-      console.log(iconeElement);
-      let response = await fetch("http://localhost:5678/api/works/id", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        // if HTTP-status is 200-299
-        alert("Photo supprimé avec succes");
-        // obtenir le corps de réponse (la méthode expliquée ci-dessous)
-      } else {
-        alert("Echec de suppression");
-      }
-    });
+//---------------FIN DE GENERER PHOTO--------------------
 
-    //---------------FIN DE GENERER PHOTO--------------------*/
+// ajout d'une photo avec input file------------------
+
+const ajoutPhoto = document.querySelector(".filePhoto");
+ajoutPhoto.addEventListener("click", getImage);
+
+function getImage() {
+  let filePht = document.getElementById("#ajouter-photo").files;
+  const imageElement = document.createElement("img");
+  imageElement.classList.add("maNouvelleImage");
+  imageElement.src = filePht;
+
+  const afficherPhoto = (document.querySelector(".aj-photo").innerHTML = "");
+  imageElement.appendChild(afficherPhoto);
+}
 
 //Ajouter une photo avec id dans l'API-------------------
 
 const btnEnvoyerObj = document.querySelector("#valider");
 btnEnvoyerObj.addEventListener("click", async (e) => {
   e.preventDefault();
+  let photosExistant = photosModal.length;
 
-  let nouvellePhoto = {
-    id: photosModal.length++,
-    title: document.querySelector("#titre").value,
-    imageUrl: "string",
-    categoryId: document.querySelector("#categorie").value,
-    userId: 0,
-  };
-  console.log(JSON.stringify(user));
-  let response = await fetch("http://localhost:5678/api/works/1", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(nouvellePhoto),
-  });
-  if (response.ok) {
-    // if HTTP-status is 200-299
+  let formData = new FormData();
 
-    // obtenir le corps de réponse (la méthode expliquée ci-dessous)
-    window.location.href = "index.html";
-  } else {
-    alert("Erreur de l'ajout de la photo");
-  }
+  // fichier HTML choisi par l'utilisateur
+  formData.append("id", photosExistant++);
+  formData.append("title", document.getElementById("#titre").value);
+  formData.append(
+    "categoryId",
+    document.getElementsByClassName("#maNouvelleImage")
+  );
+
+  // objet JavaScript de type fichier
+  let blob = new Blob([content], { type: "text/xml" });
+
+  formData.append("imageUrl", blob);
+  let request = new XMLHttpRequest();
+  request.open("POST", "http://localhost:5678/api/works");
+  request.send(formData);
 });
