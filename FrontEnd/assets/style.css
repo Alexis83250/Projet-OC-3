@@ -484,6 +484,7 @@ footer li a {
 	align-items: center;
 	justify-content: center;
 	border-radius: 3px;
+	position: relative;
 }
 
 .aj-photo i {
@@ -583,6 +584,17 @@ footer li a {
 	margin : 3em auto ;
 	text-align: center;
 	border-radius: 60px ;
+}
+
+/*Ajout de ma photo via file*/
+
+.nvPhoto {
+	position: absolute;
+	width: auto;
+	max-height: 170px;
+	height: auto;
+	top: 0%;
+    left: 37%;
 }
 
 

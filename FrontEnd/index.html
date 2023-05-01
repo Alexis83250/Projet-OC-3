@@ -82,8 +82,10 @@
 								<div class="form1">
 									<form action="#" method="get"></form>
 									<div class="aj-photo">
+										
 										<i class="fa-sharp fa-regular fa-image"></i>
-										<label for="ajouter-photo" class="filePhoto">+ Ajouter photo</label>
+										<label for="ajouter-photo" class="filePhoto"><img class="nvPhoto" src=""/>+ Ajouter photo</label>
+										
 										<input type="file" name="ajouter-photo" id="ajouter-photo" accept=".jpg, .jpeg, .png">
 										<p>jpg, png : 4mo max</p>
 									</div>
@@ -91,7 +93,7 @@
 								
 									<div class="formulaire" id="formulaire">
 										<label for="titre">Titre</label>
-										<input type="text" name="titre" id="titre" required>
+										<input type="text" name="titre" id="titre" required="champ obligatoire">
 										<label for="categorie">Catégorie</label>
 										<select name="categorie" id="categorie">
 											<option value="Sélectionner une catégorie" id="0"></option>

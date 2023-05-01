@@ -221,7 +221,7 @@ function genererPhotosModal(photosModal) {
       let response = await fetch("http://localhost:5678/api/works/id", {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json",
+          Authorization: `Bearer ${monToken}`,
         },
       });
       if (response.ok) {
@@ -242,32 +242,26 @@ genererPhotosModal(photosModal);
 //---------------FIN DE GENERER PHOTO--------------------
 
 // ajout d'une photo avec input file------------------
+const nvPhoto = document.querySelector(".nvPhoto"),
+  input = document.querySelector("#ajouter-photo"),
+  filePhoto = document.querySelector(".filePhoto");
 
-const ajoutPhoto = document.querySelector(".filePhoto");
-ajoutPhoto.addEventListener("click", getImage);
-
-function getImage() {
-  let filePht = document.getElementById("#ajouter-photo").files;
-  const imageElement = document.createElement("img");
-  imageElement.classList.add("maNouvelleImage");
-  imageElement.src = filePht;
-
-  const afficherPhoto = (document.querySelector(".aj-photo").innerHTML = "");
-  imageElement.appendChild(afficherPhoto);
-}
+input.addEventListener("change", () => {
+  nvPhoto.src = URL.createObjectURL(input.files[0]);
+  filePhoto.style.backgroundColor = "#E8F1F6";
+  console.log(nvPhoto.src);
+});
 
 //Ajouter une photo avec id dans l'API-------------------
 
 const btnEnvoyerObj = document.querySelector("#valider");
 btnEnvoyerObj.addEventListener("click", async (e) => {
   e.preventDefault();
-  let photosExistant = photosModal.length;
-
-  let formData = new FormData();
+  /*let photosExistant = photosModal.length;*/
 
   // fichier HTML choisi par l'utilisateur
-  formData.append("id", photosExistant++);
-  formData.append("title", document.getElementById("#titre").value);
+  /*formData.append("id", photosExistant++);
+  formData.append("title", document.querySelector("#titre").value);
   formData.append(
     "categoryId",
     document.getElementsByClassName("#maNouvelleImage")
@@ -276,8 +270,29 @@ btnEnvoyerObj.addEventListener("click", async (e) => {
   // objet JavaScript de type fichier
   let blob = new Blob([content], { type: "text/xml" });
 
-  formData.append("imageUrl", blob);
-  let request = new XMLHttpRequest();
+  formData.append("imageUrl", blob);*/
+
+  const imgUrl = document.querySelector(".nvPhoto").getAttribute("src");
+  const title = document.querySelector("#titre").value;
+  const category = document.querySelector("#categorie").value;
+  /*const categoryValue = category.options[category.selectedIndex].value;*/
+
+  const formData = new FormData();
+  formData.append("image", imgUrl);
+  formData.append("title", title);
+  formData.append("category", category);
+
+  console.log(imgUrl);
+  console.log(title);
+  console.log(category);
+
+  const answer = await fetch("http://localhost:5678/api/works/", {
+    method: "POST",
+    headers: { Authorization: `monToken ${monToken}` },
+    body: formData,
+  });
+
+  /*let request = new XMLHttpRequest();
   request.open("POST", "http://localhost:5678/api/works");
-  request.send(formData);
+  request.send(formData);*/
 });
