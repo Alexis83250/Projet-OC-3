@@ -446,11 +446,17 @@ footer li a {
 }
 
 .galleryModal div {
-	background-color: #D65353;
+	background-color: #000000;
 	width: 15px;
 	position: absolute;
 	margin-top: -130px;
 	margin-left: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 17px;
+	height: 17px;
+	border-radius: 2px;
 	
 }
 
@@ -569,7 +575,7 @@ footer li a {
 	cursor:auto;
 }
 
-#valider {
+#formValider {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -596,6 +602,8 @@ footer li a {
 	top: 0%;
     left: 37%;
 }
+
+
 
 
 
