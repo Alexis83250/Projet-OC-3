@@ -198,7 +198,8 @@ function genererPhotosModal(photosModal) {
 
     const iconeElement = document.createElement("div");
     iconeElement.classList.add("deletePhoto");
-    iconeElement.innerText = "III";
+    iconeElement.innerHTML =
+      '<svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.6 1.8V0.9C6.6 0.402944 6.19704 0 5.7 0H3.3C2.80294 0 2.4 0.402944 2.4 0.9V1.8H0V2.4H0.6V8.1C0.6 8.59704 1.00294 9 1.5 9H7.5C7.99704 9 8.4 8.59704 8.4 8.1V2.4H9V1.8H6.6ZM3 0.9C3 0.734316 3.13432 0.6 3.3 0.6H5.7C5.86568 0.6 6 0.734316 6 0.9V1.8H3V0.9ZM4.2 4.2V7.2H4.8V4.2H4.2ZM2.4 7.2V5.4H3V7.2H2.4ZM6 5.4V7.2H6.6V5.4H6Z" fill="white"/></svg>';
 
     const imageElement = document.createElement("img");
     imageElement.src = article.imageUrl;
@@ -214,16 +215,22 @@ function genererPhotosModal(photosModal) {
     articleElement.appendChild(imageElement);
     articleElement.appendChild(titleElement);
     articleElement.appendChild(iconeElement);
+
     //--------------Suppression photo----------------
     iconeElement.addEventListener("click", async () => {
       const iconeElement = article.id;
+      let monToken = localStorage.getItem("token");
       console.log(iconeElement);
-      let response = await fetch("http://localhost:5678/api/works/id", {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${monToken}`,
-        },
-      });
+      let response = await fetch(
+        `http://localhost:5678/api/works/${iconeElement}`,
+        {
+          method: "DELETE",
+          headers: {
+            accept: "*/*",
+            Authorization: `Bearer ${monToken}`,
+          },
+        }
+      );
       if (response.ok) {
         // if HTTP-status is 200-299
         alert("Photo supprimé avec succes");
@@ -238,6 +245,7 @@ function genererPhotosModal(photosModal) {
 }
 //permet de generer les photos non filtrés par default
 genererPhotosModal(photosModal);
+console.log(monToken);
 
 //---------------FIN DE GENERER PHOTO--------------------
 
@@ -249,50 +257,47 @@ const nvPhoto = document.querySelector(".nvPhoto"),
 input.addEventListener("change", () => {
   nvPhoto.src = URL.createObjectURL(input.files[0]);
   filePhoto.style.backgroundColor = "#E8F1F6";
-  console.log(nvPhoto.src);
+  //console.log(nvPhoto.src);
 });
 
 //Ajouter une photo avec id dans l'API-------------------
 
-const btnEnvoyerObj = document.querySelector("#valider");
-btnEnvoyerObj.addEventListener("click", async (e) => {
+const btnEnvoyerObj = document.querySelector("#formValider");
+btnEnvoyerObj.addEventListener("click", (e) => {
   e.preventDefault();
-  /*let photosExistant = photosModal.length;*/
 
-  // fichier HTML choisi par l'utilisateur
-  /*formData.append("id", photosExistant++);
-  formData.append("title", document.querySelector("#titre").value);
-  formData.append(
-    "categoryId",
-    document.getElementsByClassName("#maNouvelleImage")
-  );
-
-  // objet JavaScript de type fichier
-  let blob = new Blob([content], { type: "text/xml" });
-
-  formData.append("imageUrl", blob);*/
-
-  const imgUrl = document.querySelector(".nvPhoto").getAttribute("src");
-  const title = document.querySelector("#titre").value;
-  const category = document.querySelector("#categorie").value;
   /*const categoryValue = category.options[category.selectedIndex].value;*/
+  //console.log(imgUrl);
+  const imgUrl = document.querySelector("#ajouter-photo").getAttribute("src");
 
-  const formData = new FormData();
-  formData.append("image", imgUrl);
-  formData.append("title", title);
-  formData.append("category", category);
+  const reader = new FileReader();
 
+  const data = reader.readAsDataURL(imgUrl);
+  /*
+  reader.onload = function () {
+    console.log(reader.result);
+  };*/
   console.log(imgUrl);
-  console.log(title);
-  console.log(category);
 
-  const answer = await fetch("http://localhost:5678/api/works/", {
+  const myFormData = new FormData();
+  //const imgUrl = document.querySelector("#ajouter-photo").getAttribute("src");
+  //const title = document.querySelector("#titre").value;
+  //const category = document.querySelector("#categorie").value;
+
+  //formData.append("id", 0);
+  //myFormData.append("title", `${title}`);
+  myFormData.append("image", imgUrl);
+  //myFormData.append("categoryId", document.querySelector("#categorie").value);
+  //myFormData.append("userId", parseInt(localStorage.getItem("userId")));
+
+  console.log(myFormData);
+
+  const answer = fetch("http://localhost:5678/api/works/", {
     method: "POST",
-    headers: { Authorization: `monToken ${monToken}` },
-    body: formData,
+    headers: {
+      accept: "*/*",
+      Authorization: `Bearer ${monToken}`,
+    },
+    body: myFormData,
   });
-
-  /*let request = new XMLHttpRequest();
-  request.open("POST", "http://localhost:5678/api/works");
-  request.send(formData);*/
 });

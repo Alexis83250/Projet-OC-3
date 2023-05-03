@@ -19,8 +19,10 @@ btnEnvoyer.addEventListener("click", async (e) => {
 
     // obtenir le corps de réponse (la méthode expliquée ci-dessous)
     let token = await response.json();
-    let tok = JSON.stringify(token.token);
+    let tok = token.token;
+    let userId = token.userId;
     localStorage.setItem("token", tok);
+    localStorage.setItem("userId", userId);
     window.location.href = "index.html";
   } else {
     alert("Erreur dans l’identifiant ou le mot de passe");
