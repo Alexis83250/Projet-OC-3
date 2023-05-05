@@ -173,8 +173,8 @@ const returnModal = function (e) {
 
 document.querySelector(".return").addEventListener("click", returnModal);
 /* -----------FERMER LA DEUXIEME MODALE ----------*/
-//document.querySelector(".close2").addEventListener("click", returnModal);
-//document.querySelector(".close2").addEventListener("click", closeModal);
+document.querySelector(".close2").addEventListener("click", returnModal);
+document.querySelector(".close2").addEventListener("click", closeModal);
 document.querySelector(".close2").addEventListener("click", resetFields);
 document.querySelector(".close2").addEventListener("click", changeColor);
 
@@ -184,8 +184,8 @@ function resetFields() {
   document.querySelector(".nvPhoto").src = "";
 }
 
+//Changer le couleur de + Ajouter photo lorsuq'on click sur fermer
 function changeColor() {
-  filePhoto = document.querySelector(".filePhoto");
   filePhoto.style.backgroundColor = "#CBD6DC";
 }
 
@@ -261,7 +261,7 @@ function genererPhotosModal(photosModal) {
 }
 //permet de generer les photos non filtrés par default
 genererPhotosModal(photosModal);
-console.log(monToken);
+//console.log(monToken);
 
 //---------------FIN DE GENERER PHOTO--------------------
 
@@ -277,68 +277,36 @@ input.addEventListener("change", () => {
 });
 
 //Ajouter une photo avec id dans l'API-------------------
-//const imgUrl = document.querySelector("#ajouter-photo").getAttribute("src");
 
 const photoForm = document.querySelector("#addPhotos");
 photoForm.addEventListener("submit", addNewPhotos);
 
 function addNewPhotos(e) {
   e.preventDefault();
+  e.stopPropagation();
+  /*
   let nbPhotos = photosModal.length;
-  let idNbPhotos = ++nbPhotos;
+  let idNbPhotos = ++nbPhotos;*/
+
   const formData = new FormData(photoForm);
-  const id = idNbPhotos;
+  //const id = idNbPhotos;
   const title = formData.get("titre");
   const categoryId = formData.get("categorie");
-  const imageUrl = formData.get("ajouter-photo");
-  const userId = parseInt(localStorage.getItem("userId"));
-  //formData.append("userId", parseInt(localStorage.getItem("userId")));
+  const image = formData.get("img");
 
-  const newPhoto = {
-    id,
-    title,
-    imageUrl,
-    categoryId,
-    userId,
-  };
+  //const userId = parseInt(localStorage.getItem("userId"));
 
-  console.log(newPhoto);
+  for (const value of formData.values()) {
+    console.log(value);
+  }
+  const answer = fetch("http://localhost:5678/api/works/", {
+    method: "POST",
+    headers: {
+      //"Content-Type": "multipart/form-data",
+      //accept: "*/*",
+      Authorization: `Bearer ${monToken}`,
+    },
+    body: formData,
+  });
+  console.log(formData);
 }
-
-/*
-const btnEnvoyerObj = document.querySelector("#formValider");
-btnEnvoyerObj.addEventListener("click", (e) => {
-  e.preventDefault();
-
-  const formData = new FormData();
-  const imgUrl = document.querySelector("#ajouter-photo").getAttribute("src");
-  const title = document.getElementById("titre").value;
-  const category = document.getElementById("categorie");
-  //const categoryValue = category.options[category.selectedIndex].value;
-
-  formData.append("image", imgUrl);
-  formData.append("title", title);
-  formData.append("category", category);
-
-  /*const categoryValue = category.options[category.selectedIndex].value;*/
-//console.log(imgUrl);
-//const imgUrl = document.querySelector("#ajouter-photo").getAttribute("src");
-/*
-  const reader = new FileReader();
-
-  const data = reader.readAsDataURL(imgUrl);
-  
-  reader.onload = function () {
-    console.log(reader.result);
-  };*/
-
-//const myFormData = new FormData();
-//const imgUrl = document.querySelector("#ajouter-photo").getAttribute("src");
-//const title = document.querySelector("#titre").value;
-//const category = document.querySelector("#categorie").value;
-
-//formData.append("id", 0);
-//myFormData.append("title", `${title}`);
-//myFormData.append("image", imgUrl);
-//myFormData.append("categoryId", document.querySelector("#categorie").value);
-//myFormData.append("userId", parseInt(localStorage.getItem("userId")));
