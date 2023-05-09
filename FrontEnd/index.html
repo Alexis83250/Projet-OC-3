@@ -80,22 +80,22 @@
 							<div class="contenuModal">
 								<h2>Ajout photo</h2>
 								<div class="form1">
-									<form id="addPhotos" action="#" method="post" enctype="multipart/form-data">
+									<form id="addPhotos" name="addPhotos">
 									<div class="aj-photo">
 										
 										<i class="fa-sharp fa-regular fa-image"></i>
 										<label for="ajouter-photo" class="filePhoto"><img class="nvPhoto" src=""/>+ Ajouter photo</label>
 										
-										<input type="file" name="img" id="ajouter-photo" accept=".jpg, .jpeg, .png">
+										<input type="file" name="image" id="ajouter-photo" accept=".jpg, .jpeg, .png">
 										<p>jpg, png : 4mo max</p>
 									</div>
 								
 								
 									<div class="formulaire" id="formulaire">
 										<label for="titre">Titre</label>
-										<input type="text" name="titre" id="titre" required="champ obligatoire">
+										<input type="text" name="title" id="titre" required="champ obligatoire">
 										<label for="categorie">Catégorie</label>
-										<select name="categorie" id="categorie">
+										<select name="category" id="categorie">
 											<option value="Sélectionner une catégorie" id="0"></option>
 											<option value="1" >Objets</option>
 											<option value="2" >Appartements</option>

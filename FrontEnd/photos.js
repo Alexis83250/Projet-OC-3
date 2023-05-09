@@ -279,16 +279,44 @@ input.addEventListener("change", () => {
 //Ajouter une photo avec id dans l'API-------------------
 
 const photoForm = document.querySelector("#addPhotos");
-photoForm.addEventListener("submit", addNewPhotos);
+photoForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  //Object.fromEntries(new FormData(e.target).entries())
+  const data = new FormData(photoForm);
 
+  //const formData = new FormData(data);
+  /*
+  const imgUrl = document.querySelector("#ajouter-photo").files;
+  const title = document.getElementById("titre").value;
+  const category = document.getElementById("categorie"); */
+
+  console.log(data);
+
+  const answer = await fetch("http://localhost:5678/api/works/", {
+    method: "POST",
+    headers: {
+      //"Content-Type": "multipart/form-data",
+      //Accept: "application/json",
+      Authorization: `Bearer ${monToken}`,
+    },
+    body: data,
+  }).then((response) => {
+    if (response.ok) {
+      console.log(response.json());
+    }
+  });
+});
+
+/*
 function addNewPhotos(e) {
   e.preventDefault();
   e.stopPropagation();
   /*
   let nbPhotos = photosModal.length;
-  let idNbPhotos = ++nbPhotos;*/
+  let idNbPhotos = ++nbPhotos;
 
-  const formData = new FormData(photoForm);
+  const formData = new FormData();
   //const id = idNbPhotos;
   const title = formData.get("titre");
   const categoryId = formData.get("categorie");
@@ -299,14 +327,5 @@ function addNewPhotos(e) {
   for (const value of formData.values()) {
     console.log(value);
   }
-  const answer = fetch("http://localhost:5678/api/works/", {
-    method: "POST",
-    headers: {
-      //"Content-Type": "multipart/form-data",
-      //accept: "*/*",
-      Authorization: `Bearer ${monToken}`,
-    },
-    body: formData,
-  });
-  console.log(formData);
-}
+  
+}*/
