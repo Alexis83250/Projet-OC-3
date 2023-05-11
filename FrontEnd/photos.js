@@ -289,7 +289,7 @@ photoForm.addEventListener("submit", async (e) => {
     errorMessage += "Merci de renseigner une image \n";
   }
 
-  if (document.querySelector("#categorie").options.length == 0) {
+  if (document.querySelector("#category").options.length == 0) {
     errorMessage += "Merci de renseigner une catégorie \n";
   }
   /*
