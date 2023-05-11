@@ -212,6 +212,7 @@ function genererPhotosModal(photosModal) {
     const titleElement = document.createElement("p");
     titleElement.innerText = "editer";
 
+    //Ajout de l'icone supprimé-----------
     const iconeElement = document.createElement("div");
     iconeElement.classList.add("deletePhoto");
     iconeElement.innerHTML =
@@ -232,8 +233,10 @@ function genererPhotosModal(photosModal) {
     articleElement.appendChild(titleElement);
     articleElement.appendChild(iconeElement);
 
-    //--------------Suppression photo----------------
-    iconeElement.addEventListener("click", async () => {
+    //--------------Suppression photo--------------------------------
+    iconeElement.addEventListener("click", async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       const iconeElement = article.id;
       let monToken = localStorage.getItem("token");
       console.log(iconeElement);
@@ -248,8 +251,9 @@ function genererPhotosModal(photosModal) {
         }
       );
       if (response.ok) {
+        return false;
         // if HTTP-status is 200-299
-        alert("Photo supprimé avec succes");
+        //alert("Photo supprimé avec succes");
         // obtenir le corps de réponse (la méthode expliquée ci-dessous)
       } else {
         alert("Echec de suppression");
@@ -261,7 +265,6 @@ function genererPhotosModal(photosModal) {
 }
 //permet de generer les photos non filtrés par default
 genererPhotosModal(photosModal);
-//console.log(monToken);
 
 //---------------FIN DE GENERER PHOTO--------------------
 
@@ -282,50 +285,40 @@ const photoForm = document.querySelector("#addPhotos");
 photoForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   e.stopPropagation();
-  //Object.fromEntries(new FormData(e.target).entries())
-  const data = new FormData(photoForm);
+  let errorMessage = "";
 
-  //const formData = new FormData(data);
-  /*
-  const imgUrl = document.querySelector("#ajouter-photo").files;
-  const title = document.getElementById("titre").value;
-  const category = document.getElementById("categorie"); */
-
-  console.log(data);
-
-  const answer = await fetch("http://localhost:5678/api/works/", {
-    method: "POST",
-    headers: {
-      //"Content-Type": "multipart/form-data",
-      //Accept: "application/json",
-      Authorization: `Bearer ${monToken}`,
-    },
-    body: data,
-  }).then((response) => {
-    if (response.ok) {
-      console.log(response.json());
-    }
-  });
-});
-
-/*
-function addNewPhotos(e) {
-  e.preventDefault();
-  e.stopPropagation();
-  /*
-  let nbPhotos = photosModal.length;
-  let idNbPhotos = ++nbPhotos;
-
-  const formData = new FormData();
-  //const id = idNbPhotos;
-  const title = formData.get("titre");
-  const categoryId = formData.get("categorie");
-  const image = formData.get("img");
-
-  //const userId = parseInt(localStorage.getItem("userId"));
-
-  for (const value of formData.values()) {
-    console.log(value);
+  if (document.querySelector("#ajouter-photo").files.length == 0) {
+    errorMessage += "Merci de renseigner une image \n";
   }
-  
-}*/
+
+  if (document.querySelector("#categorie").options.length == 0) {
+    errorMessage += "Merci de renseigner une catégorie \n";
+  }
+  /*
+  if (document.querySelector("#titre").value.length === 0) {
+    errorMessage += "Merci de renseigner un titre \n";
+  }*/
+  console.log(errorMessage);
+  if (errorMessage.length) {
+    alert(errorMessage);
+  } else {
+    //Object.fromEntries(new FormData(e.target).entries())
+    const data = new FormData(photoForm);
+
+    console.log(data);
+
+    const answer = await fetch("http://localhost:5678/api/works/", {
+      method: "POST",
+      headers: {
+        //"Content-Type": "multipart/form-data",
+        //Accept: "application/json",
+        Authorization: `Bearer ${monToken}`,
+      },
+      body: data,
+    }).then((response) => {
+      if (response.ok) {
+        console.log(response.json());
+      }
+    });
+  }
+});
