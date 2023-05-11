@@ -17,9 +17,8 @@
 			<i class="fa-regular fa-pen-to-square"></i>
 			<p>Mode édition</p>
 			<p id="changement">publier les changements</p>
-		</section>
-
-	</div>
+		</div>
+	</section>
 <header>
 	
 	<h1><a href=index.html>Sophie Bluel <span>Architecte d'intérieur</span></a></h1>
@@ -51,7 +50,7 @@
 		<div class="titre">
 			<h2>Mes Projets</h2>
 			<div class="postlogin modification"><a href="#modal1" class="js-modal"><i class="fa-regular fa-pen-to-square"></i>modifier</a></div>
-			<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display: none;">
+			<aside id="modal1" class="modal" aria-hidden="true" aria-labelledby="titlemodal" style="display: none;">
 				<div class="modal-wrapper">
 					<div class="contenu-enlever">
 						<div class="close">
@@ -62,7 +61,7 @@
 							<section class="galleryModal">
 
 							</section>
-							<form action="" method="post">
+							<form method="post">
 								<input type="submit" name="Ajouter une photo" id="validerModale" value="Ajouter une photo">
 							</form>
 							<p class="closeAll"><a href="#">Supprimer la galerie</a></p>
@@ -94,8 +93,8 @@
 									<div class="formulaire" id="formulaire">
 										<label for="titre">Titre</label>
 										<input type="text" name="title" id="titre" required>
-										<label for="categorie">Catégorie</label>
-										<select name="category" id="categorie" required>
+										<label for="category">Catégorie</label>
+										<select name="category" id="category" required>
 											<option value="" selected disabled></option>
 											<option value="1" >Objets</option>
 											<option value="2" >Appartements</option>
@@ -111,7 +110,7 @@
 				</div>
 			</aside>
 		</div>
-		<div class="filterCategory">
+		<div class="filterCategory"></div>
 	</section>
 	<section class="gallery">
 

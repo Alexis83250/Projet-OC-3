@@ -530,8 +530,6 @@ footer li a {
 }
 
 
-
-
 .modal-photo .formulaire {
 	text-align: left;
     margin-top:10px;
@@ -559,7 +557,7 @@ footer li a {
     color: black;
 }
 
-#titre, #categorie {
+#titre, #category {
 	width: 450px;
 	height: 51px;
 	text-decoration: none;

@@ -36,8 +36,7 @@ function genererPhotos(photos) {
 }
 //permet de generer les photos non filtrés par default
 genererPhotos(photos);
-
-// MODAL -----------------------------
+// Generer filtre------------------------
 
 const reponseFilt = await fetch("filtre.json");
 const filtres = await reponseFilt.json();
@@ -180,7 +179,7 @@ document.querySelector(".close2").addEventListener("click", changeColor);
 
 function resetFields() {
   document.getElementById("titre").value = "";
-  document.getElementById("categorie").value = "";
+  document.getElementById("category").value = "";
   document.querySelector(".nvPhoto").src = "";
 }
 
@@ -239,7 +238,7 @@ function genererPhotosModal(photosModal) {
       e.stopPropagation();
       const iconeElement = article.id;
       let monToken = localStorage.getItem("token");
-      console.log(iconeElement);
+      //console.log(iconeElement);
       let response = await fetch(
         `http://localhost:5678/api/works/${iconeElement}`,
         {
@@ -251,9 +250,8 @@ function genererPhotosModal(photosModal) {
         }
       );
       if (response.ok) {
-        return false;
         // if HTTP-status is 200-299
-        //alert("Photo supprimé avec succes");
+        alert("Photo supprimé avec succes");
         // obtenir le corps de réponse (la méthode expliquée ci-dessous)
       } else {
         alert("Echec de suppression");
@@ -298,14 +296,14 @@ photoForm.addEventListener("submit", async (e) => {
   if (document.querySelector("#titre").value.length === 0) {
     errorMessage += "Merci de renseigner un titre \n";
   }*/
-  console.log(errorMessage);
+  //console.log(errorMessage);
   if (errorMessage.length) {
     alert(errorMessage);
   } else {
     //Object.fromEntries(new FormData(e.target).entries())
     const data = new FormData(photoForm);
 
-    console.log(data);
+    //console.log(data);
 
     const answer = await fetch("http://localhost:5678/api/works/", {
       method: "POST",
@@ -317,7 +315,7 @@ photoForm.addEventListener("submit", async (e) => {
       body: data,
     }).then((response) => {
       if (response.ok) {
-        console.log(response.json());
+        //console.log(response.json());
       }
     });
   }
