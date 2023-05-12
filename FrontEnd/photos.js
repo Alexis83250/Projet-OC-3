@@ -38,8 +38,18 @@ function genererPhotos(photos) {
 genererPhotos(photos);
 // Generer filtre------------------------
 
-const reponseFilt = await fetch("filtre.json");
+//const reponseFilt = await fetch("filtre.json");
+//const filtres = await reponseFilt.json();
+const reponseFilt = await fetch("http://localhost:5678/api/categories");
 const filtres = await reponseFilt.json();
+
+//let filterTab = [filtres];
+let filterTous = {
+  id: 0,
+  name: "Tous",
+};
+
+filtres.unshift(filterTous);
 
 function genFiltres(filtres) {
   for (let i = 0; i < filtres.length; i++) {
