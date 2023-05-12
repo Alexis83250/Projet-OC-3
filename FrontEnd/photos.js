@@ -323,7 +323,6 @@ photoForm.addEventListener("submit", async (e) => {
     const data = new FormData(photoForm);
 
     //console.log(data);
-
     const answer = await fetch("http://localhost:5678/api/works/", {
       method: "POST",
       headers: {
