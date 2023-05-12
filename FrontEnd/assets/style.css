@@ -445,7 +445,7 @@ footer li a {
 	width: 100%;
 }
 
-.galleryModal div {
+.galleryModal .deletePhoto {
 	background-color: #000000;
 	width: 15px;
 	position: absolute;
@@ -458,6 +458,25 @@ footer li a {
 	height: 17px;
 	border-radius: 2px;
 	
+}
+
+.galleryModal .deletePhoto2 {
+	background-color: #000000;
+	width: 15px;
+	position: absolute;
+	margin-top: 5px;
+	margin-left: 41px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 17px;
+	height: 17px;
+	border-radius: 2px;
+	
+}
+
+.deletePhoto2:hover, .deletePhoto:hover {
+	cursor: pointer;
 }
 
 /*--------MODAL 2---------*/
