@@ -79,7 +79,7 @@ genFiltres(filtres);
 Array.from(document.querySelectorAll(".filterChoice")).forEach((el) => {
   el.addEventListener("click", (event) => {
     const categoryId = event.target.dataset.id;
-    console.log("Category", categoryId);
+    //console.log("Category", categoryId);
     if (categoryId <= 0) {
       document.querySelector(".gallery").innerHTML = "";
       genererPhotos(photos);
@@ -189,7 +189,7 @@ document.querySelector(".close2").addEventListener("click", changeColor);
 
 function resetFields() {
   document.getElementById("titre").value = "";
-  document.getElementById("category").value = "";
+  document.getElementById("categorie").value = "";
   document.querySelector(".nvPhoto").src = "";
 }
 
@@ -308,7 +308,7 @@ photoForm.addEventListener("submit", async (e) => {
     errorMessage += "Merci de renseigner une image \n";
   }
 
-  if (document.querySelector("#category").options.length == 0) {
+  if (document.querySelector("#categorie").options.length == 0) {
     errorMessage += "Merci de renseigner une catégorie \n";
   }
   /*
